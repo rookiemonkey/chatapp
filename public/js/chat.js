@@ -4,17 +4,18 @@
 const socket = io()
 
 socket.on('message', eventData => {
-    console.log('welcome data:', eventData)
-})
-
-socket.on('newMessage', eventData => {
-    console.log('message data: ', eventData)
+    console.log(eventData)
 })
 
 const input = document.querySelector('#input')
 const btn = document.querySelector('#submit');
 btn.addEventListener('click', sendMessage)
+window.addEventListener("unload", disconnectMessage);
 
 function sendMessage() {
     socket.emit('newMessage', input.value)
+}
+
+function disconnectMessage() {
+    socket.emit('disconnect')
 }
