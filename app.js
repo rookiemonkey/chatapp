@@ -25,8 +25,9 @@ io.on('connection', socket => {
     socket.emit('message', 'Welcome!')
     socket.broadcast.emit('message', 'a new user has joined the chat')
 
-    socket.on('newMessage', newMessage => {
+    socket.on('newMessage', (newMessage, acknowledgeMessage) => {
         io.emit('message', newMessage)
+        acknowledgeMessage('from server: Delivered')
     })
 
     socket.on('location', location => {

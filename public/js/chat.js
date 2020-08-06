@@ -15,7 +15,9 @@ loc.addEventListener('click', locationMessage)
 window.addEventListener("unload", disconnectMessage);
 
 function sendMessage() {
-    socket.emit('newMessage', input.value)
+    socket.emit('newMessage', input.value, ackMessageFromServer => {
+        console.log('Message was delivered', ackMessageFromServer)
+    })
 }
 
 function disconnectMessage() {
