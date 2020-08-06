@@ -33,6 +33,8 @@ function locationMessage() {
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords
         const loc = `https://www.google.com/maps?q=${latitude},${longitude}`
-        socket.emit('location', loc)
+        socket.emit('location', loc, ackMessageFromServer => {
+            console.log(ackMessageFromServer)
+        })
     })
 }

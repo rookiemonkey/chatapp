@@ -35,8 +35,9 @@ io.on('connection', socket => {
         io.emit('message', newMessage)
     })
 
-    socket.on('location', location => {
+    socket.on('location', (location, acknowledgeMessage) => {
         socket.broadcast.emit('message', location)
+        acknowledgeMessage('from server: Location sucessfully shared')
     })
 
     socket.on('disconnect', () => {
