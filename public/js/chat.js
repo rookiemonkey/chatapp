@@ -16,6 +16,9 @@ window.addEventListener("unload", disconnectMessage);
 
 function sendMessage() {
     socket.emit('newMessage', input.value, ackMessageFromServer => {
+        if (ackMessageFromServer) {
+            return console.log(ackMessageFromServer)
+        }
         console.log('Message was delivered', ackMessageFromServer)
     })
 }
