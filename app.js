@@ -19,8 +19,13 @@ app.get('/', (req, res) => {
     res.render('index.html')
 })
 
-io.on('connection', () => {
-    console.log('new web socket connection connected....')
+io.on('connection', socket => {
+
+    socket.emit('message', 'Welcome!')
+
+    socket.on('newMessage', newMessage => {
+        io.emit('newMessage', newMessage)
+    })
 })
 
 module.exports = server
