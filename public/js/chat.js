@@ -8,8 +8,10 @@ socket.on('message', eventData => {
 })
 
 const input = document.querySelector('#input')
-const btn = document.querySelector('#submit');
-btn.addEventListener('click', sendMessage)
+const send = document.querySelector('#submit')
+const loc = document.querySelector('#location')
+send.addEventListener('click', sendMessage)
+loc.addEventListener('click', locationMessage)
 window.addEventListener("unload", disconnectMessage);
 
 function sendMessage() {
@@ -18,4 +20,13 @@ function sendMessage() {
 
 function disconnectMessage() {
     socket.emit('disconnect')
+}
+
+function locationMessage() {
+    if (!navigator.geolocation) { alert('Geolocation not supported by browser') }
+
+    navigator.geolocation.getCurrentPosition(position => {
+        const loc = `LAT: ${position.coords.latitude}, LNG: ${position.coords.longitude}`
+        socket.emit('location', loc)
+    })
 }
