@@ -26,7 +26,10 @@ function locationMessage() {
     if (!navigator.geolocation) { alert('Geolocation not supported by browser') }
 
     navigator.geolocation.getCurrentPosition(position => {
-        const loc = `LAT: ${position.coords.latitude}, LNG: ${position.coords.longitude}`
+        const loc = {
+            latitute: position.coords.latitude,
+            longitude: position.coords.longitude
+        }
         socket.emit('location', loc)
     })
 }
