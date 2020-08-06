@@ -29,9 +29,10 @@ io.on('connection', socket => {
         const filter = new Filter()
 
         if (filter.isProfane(newMessage)) {
-            return acknowledgeMessage('from server: bad-words are not allowed')
+            return acknowledgeMessage('Profanity not allowed')
         }
 
+        acknowledgeMessage(false)
         io.emit('message', newMessage)
     })
 

@@ -7,25 +7,41 @@ socket.on('message', eventData => {
     console.log(eventData)
 })
 
-const input = document.querySelector('#input')
-const send = document.querySelector('#submit')
-const loc = document.querySelector('#location')
-send.addEventListener('click', sendMessage)
-loc.addEventListener('click', locationMessage)
-window.addEventListener("unload", disconnectMessage);
+// send new message
+const form = document.querySelector('#form')
+const input = form.querySelector('#input')
+const send = form.querySelector('#submit')
+form.addEventListener('submit', sendMessage)
 
-function sendMessage() {
+function sendMessage(event) {
+    event.preventDefault()
+    send.setAttribute('disabled', 'disabled')
+
     socket.emit('newMessage', input.value, ackMessageFromServer => {
+        send.removeAttribute('disabled')
+
         if (ackMessageFromServer) {
             return console.log(ackMessageFromServer)
         }
-        console.log('Message was delivered', ackMessageFromServer)
+
+        input.value = ''
+        input.focus()
+        console.log('Message was delivered')
     })
 }
+
+
+// send disconnect user message
+window.addEventListener("unload", disconnectMessage);
 
 function disconnectMessage() {
     socket.emit('disconnect')
 }
+
+
+// send location message
+const loc = document.querySelector('#location')
+loc.addEventListener('click', locationMessage)
 
 function locationMessage() {
     if (!navigator.geolocation) { alert('Geolocation not supported by browser') }
