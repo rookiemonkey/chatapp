@@ -3,15 +3,18 @@
 // isNowConnected should be matched on the socket.emit on the server
 const socket = io()
 
-socket.on('message', eventData => {
-    console.log(eventData)
-})
-
 // send new message
 const form = document.querySelector('#form')
 const input = form.querySelector('#input')
 const send = form.querySelector('#submit')
+const messages = document.querySelector('#messages')
+const messageTemplate = document.querySelector('#message-template').innerHTML
 form.addEventListener('submit', sendMessage)
+
+socket.on('message', eventData => {
+    const html = Mustache.render(messageTemplate, { message: eventData })
+    messages.insertAdjacentHTML('beforeend', html)
+})
 
 function sendMessage(event) {
     event.preventDefault()
