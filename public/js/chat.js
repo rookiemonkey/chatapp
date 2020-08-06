@@ -40,16 +40,19 @@ function disconnectMessage() {
 
 
 // send location message
-const loc = document.querySelector('#location')
-loc.addEventListener('click', locationMessage)
+const btn_loc = document.querySelector('#location')
+btn_loc.addEventListener('click', locationMessage)
 
 function locationMessage() {
     if (!navigator.geolocation) { alert('Geolocation not supported by browser') }
+
+    btn_loc.setAttribute('disabled', 'disabled')
 
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords
         const loc = `https://www.google.com/maps?q=${latitude},${longitude}`
         socket.emit('location', loc, ackMessageFromServer => {
+            btn_loc.removeAttribute('disabled')
             console.log(ackMessageFromServer)
         })
     })
