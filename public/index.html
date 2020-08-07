@@ -30,5 +30,15 @@
     </div>
 </script>
 
+<script src="https://unpkg.com/getlibs"></script>
 <script src='/socket.io/socket.io.js'></script>
-<script src='/js/chat.js'></script>
+<script>
+    // io is was available becuase of src='/socket.io/socket.io.js'
+    // once io() is invoked, it triggers connection to the socket enabled server
+    // isNowConnected should be matched on the socket.emit on the server
+    const socket = io()
+    System.import('/js/sendMessage.js');
+    System.import('/js/sendLocation.js');
+    System.import('/js/sendDisconnect.js');
+    System.import('/js/onMessage.js');
+</script>

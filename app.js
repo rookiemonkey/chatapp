@@ -46,7 +46,7 @@ io.on('connection', socket => {
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', setAlert('a user has left'))
+        io.emit('message', setAlert('A user has left'))
     })
 })
 
