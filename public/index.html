@@ -13,15 +13,15 @@
 <div id='messages'></div>
 
 <script id='message-template' type='text/html'>
-    <div> {{&message}} </div>
+    <div><p>{{message}}</p></div>
 </script>
 
 <script id='location-template' type='text/html'>
-    <div> {{&location}}</div>
+    <div><a href="{{location}}" target="_blank">My Location</a></div>
 </script>
 
 <script id='alert-template' type='text/html'>
-    <div> {{&alert}}</div>
+    <div><p>{{alert}}</p></div>
 </script>
 
 <script src='/socket.io/socket.io.js'></script>

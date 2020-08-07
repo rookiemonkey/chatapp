@@ -3,12 +3,16 @@
 // isNowConnected should be matched on the socket.emit on the server
 const socket = io()
 
+// html templates
+const messageTemplate = document.querySelector('#message-template').innerHTML
+const locationTempate = document.querySelector('#location-template').innerHTML
+const alertTemplate = document.querySelector('#alert-template').innerHTML
+
 // send new message
 const form = document.querySelector('#form')
 const input = form.querySelector('#input')
 const send = form.querySelector('#submit')
 const messages = document.querySelector('#messages')
-const messageTemplate = document.querySelector('#message-template').innerHTML
 form.addEventListener('submit', sendMessage)
 
 function sendMessage(event) {
@@ -38,7 +42,6 @@ function disconnectMessage() {
 
 
 // send location message
-const locationTempate = document.querySelector('#location-template').innerHTML
 const btn_loc = document.querySelector('#location')
 btn_loc.addEventListener('click', locationMessage)
 
@@ -59,10 +62,7 @@ function locationMessage() {
     })
 }
 
-
-const alertTemplate = document.querySelector('#alert-template').innerHTML
-
-// event listener
+// MESSAGE event listener
 socket.on('message', eventData => {
     let html;
 

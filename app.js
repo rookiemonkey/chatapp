@@ -24,12 +24,12 @@ io.on('connection', socket => {
 
     socket.emit('message', {
         type: 'new_alert',
-        alert: `<p>Welcome</p>`
+        alert: `Welcome`
     })
 
     socket.broadcast.emit('message', {
         type: 'new_alert',
-        alert: `<p>A new user has joined the chat</p>`
+        alert: 'A new user has joined the chat'
     })
 
     socket.on('newMessage', (newMessage, acknowledgeMessage) => {
@@ -41,7 +41,7 @@ io.on('connection', socket => {
 
         io.emit('message', {
             type: 'new_message',
-            message: `<p>${newMessage}</p>`
+            message: newMessage
         })
         acknowledgeMessage(false)
     })
@@ -49,7 +49,7 @@ io.on('connection', socket => {
     socket.on('location', (location, acknowledgeMessage) => {
         io.emit('message', {
             type: 'new_location',
-            location: `<a href=${location}>My Location</a>`
+            location: location
         })
         acknowledgeMessage('from server: Location sucessfully shared')
     })
@@ -57,7 +57,7 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         io.emit('message', {
             type: 'new_alert',
-            alert: `<p>A user left the chat</p>`
+            alert: `A user left the chat`
         })
     })
 })
