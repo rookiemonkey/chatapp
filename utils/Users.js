@@ -34,27 +34,31 @@ const removeUser = id => {
     return users.splice(isExistingUser, 1)[0]
 }
 
+// GET USER
+const getUser = id => {
+    const isExistingUser = users.findIndex(user => user.id === id)
 
+    if (!isExistingUser) {
+        return { error: 'user is not in the room' }
+    }
 
-// addUser({
-//     id: 12345,
-//     username: 'adafaaa',
-//     room: 'aaa'
-// })
+    return users[isExistingUser]
+}
 
-// addUser({
-//     id: 123145,
-//     username: 'adaasfaaa',
-//     room: 'aaa'
-// })
+// GET USERS
+const getUsers = room => {
+    const roomQuery = room.trim().toLowerCase()
 
-// const res = addUser({
-//     id: 6,
-//     username: 'adaf',
-//     room: 'aaa'
-// })
+    const usersInTheRoom = users.filter(user => {
+        return user.room === roomQuery
+    })
 
+    return usersInTheRoom
+}
 
-// const removed = removeUser(123145)
-// console.log('current users', users)
-// console.log('removed user', removed)
+module.exports = {
+    addUser,
+    removeUser,
+    getUser,
+    getUsers
+}

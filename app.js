@@ -12,7 +12,7 @@ const socketio = require('socket.io');
 const io = socketio(server);
 
 const utilities = require('./utils')
-const { setAlert, setLocation, setNewMessage } = utilities;
+const { setAlert, setLocation, setNewMessage, UserUtils } = utilities;
 
 app.use(express.static("public"));
 
