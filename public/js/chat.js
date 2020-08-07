@@ -70,19 +70,19 @@ socket.on('message', eventData => {
         case 'new_message':
             html = Mustache.render(messageTemplate, {
                 message: eventData.message,
-                timestamp: eventData.timestamp
+                timestamp: moment(eventData.timestamp).format('h:mm a')
             })
             break;
         case 'new_location':
             html = Mustache.render(locationTempate, {
                 location: eventData.location,
-                timestamp: eventData.timestamp
+                timestamp: moment(eventData.timestamp).format('h:mm a')
             })
             break;
         case 'new_alert':
             html = Mustache.render(alertTemplate, {
                 alert: eventData.alert,
-                timestamp: eventData.timestamp
+                timestamp: moment(eventData.timestamp).format('h:mm a')
             })
             break;
         default:
