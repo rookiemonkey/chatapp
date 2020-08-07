@@ -22,8 +22,15 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
 
-    socket.emit('welcome', 'Welcome!')
-    socket.broadcast.emit('joined', 'a new user has joined the chat')
+    socket.emit('message', {
+        type: 'new_alert',
+        alert: `<p>Welcome</p>`
+    })
+
+    socket.broadcast.emit('message', {
+        type: 'new_alert',
+        alert: `<p>A new user has joined the chat</p>`
+    })
 
     socket.on('newMessage', (newMessage, acknowledgeMessage) => {
         const filter = new Filter()
@@ -48,7 +55,10 @@ io.on('connection', socket => {
     })
 
     socket.on('disconnect', () => {
-        io.emit('left', 'A user left the chat')
+        io.emit('message', {
+            type: 'new_alert',
+            alert: `<p>A user left the chat</p>`
+        })
     })
 })
 

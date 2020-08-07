@@ -60,6 +60,8 @@ function locationMessage() {
 }
 
 
+const alertTemplate = document.querySelector('#alert-template').innerHTML
+
 // event listener
 socket.on('message', eventData => {
     let html;
@@ -71,24 +73,12 @@ socket.on('message', eventData => {
         case 'new_location':
             html = Mustache.render(locationTempate, { location: eventData.location })
             break;
+        case 'new_alert':
+            html = Mustache.render(alertTemplate, { alert: eventData.alert })
+            break;
         default:
             html = null
     }
 
-    messages.insertAdjacentHTML('beforeend', html)
-})
-
-socket.on('welcome', eventData => {
-    const html = Mustache.render(messageTemplate, { message: eventData })
-    messages.insertAdjacentHTML('beforeend', html)
-})
-
-socket.on('joined', eventData => {
-    const html = Mustache.render(messageTemplate, { message: eventData })
-    messages.insertAdjacentHTML('beforeend', html)
-})
-
-socket.on('left', eventData => {
-    const html = Mustache.render(messageTemplate, { message: eventData })
     messages.insertAdjacentHTML('beforeend', html)
 })
