@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
 
-    socket.emit('message', 'Welcome!')
-    socket.broadcast.emit('message', 'a new user has joined the chat')
+    socket.emit('welcome', 'Welcome!')
+    socket.broadcast.emit('joined', 'a new user has joined the chat')
 
     socket.on('newMessage', (newMessage, acknowledgeMessage) => {
         const filter = new Filter()
@@ -32,17 +32,23 @@ io.on('connection', socket => {
             return acknowledgeMessage('Profanity not allowed')
         }
 
+        io.emit('message', {
+            type: 'new_message',
+            message: `<p>${newMessage}</p>`
+        })
         acknowledgeMessage(false)
-        io.emit('message', newMessage)
     })
 
     socket.on('location', (location, acknowledgeMessage) => {
-        socket.broadcast.emit('message', location)
+        io.emit('message', {
+            type: 'new_location',
+            location: `<a href=${location}>My Location</a>`
+        })
         acknowledgeMessage('from server: Location sucessfully shared')
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', 'A user left the chat')
+        io.emit('left', 'A user left the chat')
     })
 })
 

@@ -13,9 +13,11 @@
 <div id='messages'></div>
 
 <script id='message-template' type='text/html'>
-    <div>
-        <p>{{message}}</p>
-    </div>
+    <div> {{&message}} </div>
+</script>
+
+<script id='location-template' type='text/html'>
+    <div> {{&location}}</div>
 </script>
 
 <script src='/socket.io/socket.io.js'></script>

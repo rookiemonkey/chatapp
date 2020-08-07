@@ -11,11 +11,6 @@ const messages = document.querySelector('#messages')
 const messageTemplate = document.querySelector('#message-template').innerHTML
 form.addEventListener('submit', sendMessage)
 
-socket.on('message', eventData => {
-    const html = Mustache.render(messageTemplate, { message: eventData })
-    messages.insertAdjacentHTML('beforeend', html)
-})
-
 function sendMessage(event) {
     event.preventDefault()
     send.setAttribute('disabled', 'disabled')
@@ -43,11 +38,14 @@ function disconnectMessage() {
 
 
 // send location message
+const locationTempate = document.querySelector('#location-template').innerHTML
 const btn_loc = document.querySelector('#location')
 btn_loc.addEventListener('click', locationMessage)
 
 function locationMessage() {
-    if (!navigator.geolocation) { alert('Geolocation not supported by browser') }
+    if (!navigator.geolocation) {
+        return alert('Geolocation not supported by browser')
+    }
 
     btn_loc.setAttribute('disabled', 'disabled')
 
@@ -60,3 +58,37 @@ function locationMessage() {
         })
     })
 }
+
+
+// event listener
+socket.on('message', eventData => {
+    let html;
+
+    switch (eventData.type) {
+        case 'new_message':
+            html = Mustache.render(messageTemplate, { message: eventData.message })
+            break;
+        case 'new_location':
+            html = Mustache.render(locationTempate, { location: eventData.location })
+            break;
+        default:
+            html = null
+    }
+
+    messages.insertAdjacentHTML('beforeend', html)
+})
+
+socket.on('welcome', eventData => {
+    const html = Mustache.render(messageTemplate, { message: eventData })
+    messages.insertAdjacentHTML('beforeend', html)
+})
+
+socket.on('joined', eventData => {
+    const html = Mustache.render(messageTemplate, { message: eventData })
+    messages.insertAdjacentHTML('beforeend', html)
+})
+
+socket.on('left', eventData => {
+    const html = Mustache.render(messageTemplate, { message: eventData })
+    messages.insertAdjacentHTML('beforeend', html)
+})
