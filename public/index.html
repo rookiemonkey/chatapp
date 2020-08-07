@@ -2,9 +2,6 @@
 <html lang="en">
 
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
     <link rel='icon' href='./img/favicon.png' />
     <link rel='stylesheet' href='./css/styles.css' />
     <meta charset="UTF-8">
@@ -13,74 +10,20 @@
 </head>
 
 <body>
-    <div class="chat">
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h1>JOIN!</h1>
+            <form action="./chat.html">
+                <label for="username">Display Name</label>
+                <input id='username' type='text' name="username" placeholder="Display Name" required />
 
-        <aside class="chat__sidebar">
+                <label for="room">Room Name</label>
+                <input id='room' type='text' name="room" placeholder="Room Name" required />
 
-        </aside>
-
-        <div class="chat__main">
-            <div id='messages' class="chat__messages"></div>
-
-            <div class="compose">
-                <form id='form'>
-                    <input id='input' type='text' />
-                    <button id='submit'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill='white' width="24" height="24" viewBox="0 0 24 24">
-                            <path
-                                d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z" />
-                        </svg>
-                    </button>
-                </form>
-                <button id='location'>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill='white' width="24" height="24" viewBox="0 0 24 24">
-                        <path
-                            d="M12 0c-4.198 0-8 3.403-8 7.602 0 6.243 6.377 6.903 8 16.398 1.623-9.495 8-10.155 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.342-3 3-3 3 1.343 3 3-1.343 3-3 3z" />
-                    </svg>
-                </button>
-            </div>
+                <button>Join</button>
+            </form>
         </div>
-
     </div>
 </body>
-
-<script id='message-template' type='text/html'>
-    <div class='message'>
-        <p>
-            <span class="message__name">@username</span>
-            <span class="message__meta">{{timestamp}}</span>
-        </p>
-        <p>{{message}}</p>
-    </div>
-</script>
-
-<script id='location-template' type='text/html'>
-    <div class='message'>
-        <p>
-            <span class="message__name">@username</span>
-            <span class="message__meta">{{timestamp}}</span>
-        </p>
-        <p><a href="{{location}}" target="_blank">My Location</a></p>
-    </div>
-</script>
-
-<script id='alert-template' type='text/html'>
-    <div class='message'>
-        <p><span>{{timestamp}}</span> {{alert}}</p>
-    </div>
-</script>
-
-<script src="https://unpkg.com/getlibs"></script>
-<script src='/socket.io/socket.io.js'></script>
-<script>
-    // io is was available becuase of src='/socket.io/socket.io.js'
-    // once io() is invoked, it triggers connection to the socket enabled server
-    // isNowConnected should be matched on the socket.emit on the server
-    const socket = io()
-    System.import('/js/sendMessage.js');
-    System.import('/js/sendLocation.js');
-    System.import('/js/sendDisconnect.js');
-    System.import('/js/onMessage.js');
-</script>
 
 </html>
