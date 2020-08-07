@@ -77,6 +77,10 @@
     // once io() is invoked, it triggers connection to the socket enabled server
     // isNowConnected should be matched on the socket.emit on the server
     const socket = io()
+
+    const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
+
+    System.import('/js/toJoin.js');
     System.import('/js/sendMessage.js');
     System.import('/js/sendLocation.js');
     System.import('/js/sendDisconnect.js');

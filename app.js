@@ -25,9 +25,12 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
 
-    socket.emit('message', setAlert('Welcome!'))
+    socket.on('join', ({ username, room }) => {
+        socket.join(room)
+        socket.emit('message', setAlert('Welcome!'))
+        socket.broadcast.to(room).emit('message', setAlert(`${username} has joined the room`))
 
-    socket.broadcast.emit('message', setAlert('A new user has joined'))
+    })
 
     socket.on('newMessage', (newMessage, acknowledgeMessage) => {
         const filter = new Filter()

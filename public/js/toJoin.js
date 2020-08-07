@@ -1,0 +1,1 @@
+socket.emit('join', { username, room })
