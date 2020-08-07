@@ -68,13 +68,22 @@ socket.on('message', eventData => {
 
     switch (eventData.type) {
         case 'new_message':
-            html = Mustache.render(messageTemplate, { message: eventData.message })
+            html = Mustache.render(messageTemplate, {
+                message: eventData.message,
+                timestamp: eventData.timestamp
+            })
             break;
         case 'new_location':
-            html = Mustache.render(locationTempate, { location: eventData.location })
+            html = Mustache.render(locationTempate, {
+                location: eventData.location,
+                timestamp: eventData.timestamp
+            })
             break;
         case 'new_alert':
-            html = Mustache.render(alertTemplate, { alert: eventData.alert })
+            html = Mustache.render(alertTemplate, {
+                alert: eventData.alert,
+                timestamp: eventData.timestamp
+            })
             break;
         default:
             html = null

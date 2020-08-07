@@ -11,6 +11,9 @@ const server = http.createServer(app);
 const socketio = require('socket.io');
 const io = socketio(server);
 
+const utilities = require('./utils')
+const { setAlert, setLocation, setNewMessage } = utilities;
+
 app.use(express.static("public"));
 
 // ======================================
@@ -22,15 +25,9 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
 
-    socket.emit('message', {
-        type: 'new_alert',
-        alert: `Welcome`
-    })
+    socket.emit('message', setAlert('Welcome!'))
 
-    socket.broadcast.emit('message', {
-        type: 'new_alert',
-        alert: 'A new user has joined the chat'
-    })
+    socket.broadcast.emit('message', setAlert('A new user has joined'))
 
     socket.on('newMessage', (newMessage, acknowledgeMessage) => {
         const filter = new Filter()
@@ -39,26 +36,17 @@ io.on('connection', socket => {
             return acknowledgeMessage('Profanity not allowed')
         }
 
-        io.emit('message', {
-            type: 'new_message',
-            message: newMessage
-        })
+        io.emit('message', setNewMessage(newMessage))
         acknowledgeMessage(false)
     })
 
     socket.on('location', (location, acknowledgeMessage) => {
-        io.emit('message', {
-            type: 'new_location',
-            location: location
-        })
+        io.emit('message', setLocation(location))
         acknowledgeMessage('from server: Location sucessfully shared')
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', {
-            type: 'new_alert',
-            alert: `A user left the chat`
-        })
+        io.emit('message', setAlert('a user has left'))
     })
 })
 
