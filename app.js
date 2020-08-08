@@ -42,10 +42,10 @@ io.on('connection', socket => {
         const user = getUser(socket.id)
         const filter = new Filter()
 
-        if (user.error) { return acknowledgeMessage(user.error) }
+        if (user.error) { return acknowledgeMessage({ error: user.error }) }
 
         if (filter.isProfane(newMessage)) {
-            return acknowledgeMessage('Profanity not allowed')
+            return acknowledgeMessage({ error: 'Profanity not allowed' })
         }
 
         acknowledgeMessage(false)

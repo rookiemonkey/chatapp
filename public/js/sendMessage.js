@@ -12,8 +12,8 @@ function sendMessage(event) {
     socket.emit('newMessage', input.value, ackMessageFromServer => {
         send.removeAttribute('disabled')
 
-        if (ackMessageFromServer) {
-            return console.log(ackMessageFromServer)
+        if (ackMessageFromServer.error) {
+            return alert(ackMessageFromServer.error)
         }
 
         input.value = ''

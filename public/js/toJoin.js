@@ -1,7 +1,7 @@
 socket.emit('join', { username, room }, ackMessageFromServer => {
     if (ackMessageFromServer.error) {
         alert(ackMessageFromServer.error)
-        location.href = '/'
+        return location.href = '/'
     }
 
     alert(ackMessageFromServer.alert)

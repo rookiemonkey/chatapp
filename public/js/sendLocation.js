@@ -15,7 +15,7 @@ function locationMessage() {
         socket.emit('location', loc, ackMessageFromServer => {
             btn_loc.removeAttribute('disabled')
 
-            if (ackMessageFromServer.error) { alert(ackMessageFromServer.error) }
+            if (ackMessageFromServer.error) { return alert(ackMessageFromServer.error) }
 
             alert(ackMessageFromServer.alert)
         })
