@@ -49,7 +49,7 @@ io.on('connection', socket => {
         }
 
         acknowledgeMessage(false)
-        io.to(user.room).emit('message', setNewMessage(newMessage))
+        io.to(user.room).emit('message', setNewMessage(newMessage, user.username))
     })
 
     socket.on('location', (location, acknowledgeMessage) => {

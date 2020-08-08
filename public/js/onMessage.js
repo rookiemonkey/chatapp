@@ -11,6 +11,7 @@ socket.on('message', eventData => {
         case 'new_message':
             html = Mustache.render(messageTemplate, {
                 message: eventData.message,
+                username: eventData.sender,
                 timestamp: moment(eventData.timestamp).format('h:mm a')
             })
             break;
