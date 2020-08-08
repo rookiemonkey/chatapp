@@ -57,7 +57,7 @@ io.on('connection', socket => {
 
         if (user.error) { return acknowledgeMessage({ error: user.error }) }
 
-        io.to(user.room).emit('message', setLocation(location))
+        io.to(user.room).emit('message', setLocation(location, user.username))
         acknowledgeMessage({ alert: 'Location sucessfully shared' })
     })
 

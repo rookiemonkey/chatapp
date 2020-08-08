@@ -18,6 +18,7 @@ socket.on('message', eventData => {
         case 'new_location':
             html = Mustache.render(locationTempate, {
                 location: eventData.location,
+                username: eventData.sender,
                 timestamp: moment(eventData.timestamp).format('h:mm a')
             })
             break;
