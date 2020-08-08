@@ -27,7 +27,7 @@ const addUser = ({ id, username, room }) => {
 const removeUser = id => {
     const isExistingUser = users.findIndex(user => user.id === id)
 
-    if (!isExistingUser) {
+    if (isExistingUser < 0) {
         return { error: 'user is not in the room' }
     }
 
@@ -38,7 +38,7 @@ const removeUser = id => {
 const getUser = id => {
     const isExistingUser = users.findIndex(user => user.id === id)
 
-    if (!isExistingUser) {
+    if (isExistingUser < 0) {
         return { error: 'user is not in the room' }
     }
 

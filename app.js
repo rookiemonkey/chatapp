@@ -13,6 +13,7 @@ const io = socketio(server);
 
 const utilities = require('./utils')
 const { setAlert, setLocation, setNewMessage, UserUtils } = utilities;
+const { addUser, removeUser, getUser, getUsers } = UserUtils;
 
 app.use(express.static("public"));
 
@@ -25,22 +26,30 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
 
-    socket.on('join', ({ username, room }) => {
-        socket.join(room)
-        socket.emit('message', setAlert('Welcome!'))
-        socket.broadcast.to(room).emit('message', setAlert(`${username} has joined the room`))
+    socket.on('join', ({ username, room }, acknowledgeMessage) => {
+        const { error, user } = addUser({ id: socket.id, username, room })
+        if (error) { return acknowledgeMessage({ error }) }
 
+        socket.join(user.room)
+        socket.emit('message', setAlert('Welcome!'))
+        socket.broadcast.to(user.room).emit('message', setAlert(`${user.username} has joined the room`))
+
+        const alert = `Successfully joined ${user.room}`
+        acknowledgeMessage({ alert })
     })
 
     socket.on('newMessage', (newMessage, acknowledgeMessage) => {
+        const user = getUser(socket.id)
         const filter = new Filter()
+
+        if (user.error) { return acknowledgeMessage(user.error) }
 
         if (filter.isProfane(newMessage)) {
             return acknowledgeMessage('Profanity not allowed')
         }
 
-        io.emit('message', setNewMessage(newMessage))
         acknowledgeMessage(false)
+        io.to(user.room).emit('message', setNewMessage(newMessage))
     })
 
     socket.on('location', (location, acknowledgeMessage) => {
@@ -49,7 +58,8 @@ io.on('connection', socket => {
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', setAlert('A user has left'))
+        const leftUser = removeUser(socket.id)
+        if (leftUser) { io.to(leftUser.room).emit('message', setAlert(`${leftUser.name} has left`)) }
     })
 })
 
