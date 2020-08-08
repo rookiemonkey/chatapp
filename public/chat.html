@@ -93,6 +93,7 @@
     const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
 
     System.import('/js/toJoin.js');
+    System.import('/js/toScroll.js');
     System.import('/js/sendMessage.js');
     System.import('/js/sendLocation.js');
     System.import('/js/sendDisconnect.js');

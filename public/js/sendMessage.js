@@ -18,5 +18,6 @@ function sendMessage(event) {
 
         input.value = ''
         input.focus()
+        toScroll()
     })
 }

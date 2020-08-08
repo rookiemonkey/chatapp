@@ -17,7 +17,7 @@ function locationMessage() {
 
             if (ackMessageFromServer.error) { return alert(ackMessageFromServer.error) }
 
-            alert(ackMessageFromServer.alert)
+            toScroll()
         })
     })
 }
