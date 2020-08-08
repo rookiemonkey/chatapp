@@ -48,6 +48,10 @@ io.on('connection', socket => {
             return acknowledgeMessage({ error: 'Profanity not allowed' })
         }
 
+        if (newMessage === '') {
+            return acknowledgeMessage({ error: 'It would be best if we can say something' })
+        }
+
         acknowledgeMessage(false)
         io.to(user.room).emit('message', setNewMessage(newMessage, user.username))
     })
