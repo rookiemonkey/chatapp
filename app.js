@@ -63,7 +63,7 @@ io.on('connection', socket => {
 
     socket.on('disconnect', () => {
         const leftUser = removeUser(socket.id)
-        if (leftUser) { io.to(leftUser.room).emit('message', setAlert(`${leftUser.name} has left`)) }
+        if (leftUser) { io.to(leftUser.room).emit('message', setAlert(`${leftUser.username} has left`)) }
     })
 })
 
