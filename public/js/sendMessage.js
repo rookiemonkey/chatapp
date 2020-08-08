@@ -18,6 +18,5 @@ function sendMessage(event) {
 
         input.value = ''
         input.focus()
-        console.log('Message was delivered')
     })
 }

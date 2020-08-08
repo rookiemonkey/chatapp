@@ -12,7 +12,7 @@ const socketio = require('socket.io');
 const io = socketio(server);
 
 const utilities = require('./utils')
-const { setAlert, setLocation, setNewMessage, UserUtils } = utilities;
+const { setAlert, setLocation, setNewMessage, setUser, UserUtils } = utilities;
 const { addUser, removeUser, getUser, getUsers } = UserUtils;
 
 app.use(express.static("public"));
@@ -32,10 +32,8 @@ io.on('connection', socket => {
 
         socket.join(user.room)
         socket.emit('message', setAlert('Welcome!'))
+        io.to(user.room).emit('onRoom', setUser(user.room, getUsers(user.room)))
         socket.broadcast.to(user.room).emit('message', setAlert(`${user.username} has joined the room`))
-
-        const alert = `Successfully joined ${user.room}`
-        acknowledgeMessage({ alert })
     })
 
     socket.on('newMessage', (newMessage, acknowledgeMessage) => {
@@ -67,7 +65,11 @@ io.on('connection', socket => {
 
     socket.on('disconnect', () => {
         const leftUser = removeUser(socket.id)
-        if (leftUser) { io.to(leftUser.room).emit('message', setAlert(`${leftUser.username} has left`)) }
+        const { username, room } = leftUser
+        if (leftUser) {
+            io.to(room).emit('message', setAlert(`${username} has left`))
+            io.to(room).emit('onRoom', setUser(room, getUsers(room)))
+        }
     })
 })
 

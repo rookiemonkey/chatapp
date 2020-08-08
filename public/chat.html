@@ -15,7 +15,7 @@
 <body>
     <div class="chat">
 
-        <aside class="chat__sidebar">
+        <aside id='sidebar' class="chat__sidebar">
 
         </aside>
 
@@ -43,6 +43,18 @@
 
     </div>
 </body>
+
+<script id='user-template' type='text/html'>
+    <div id='user-template-container'>
+        <h2 class="room-title">{{room}}</h2>
+        <h3 class="list-title">Users</h3>
+        <ul class="users">
+            {{#users}}
+                <li>{{username}}</li>
+            {{/users}}
+        </ul>
+    </div>
+</script>
 
 <script id='message-template' type='text/html'>
     <div class='message'>
@@ -85,6 +97,7 @@
     System.import('/js/sendLocation.js');
     System.import('/js/sendDisconnect.js');
     System.import('/js/onMessage.js');
+    System.import('/js/onRoom.js');
 </script>
 
 </html>

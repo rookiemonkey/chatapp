@@ -47,6 +47,8 @@ const getUser = id => {
 
 // GET USERS
 const getUsers = room => {
+    if (!room) { return null }
+    
     const roomQuery = room.trim().toLowerCase()
 
     const usersInTheRoom = users.filter(user => {
