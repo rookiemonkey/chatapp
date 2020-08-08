@@ -53,8 +53,12 @@ io.on('connection', socket => {
     })
 
     socket.on('location', (location, acknowledgeMessage) => {
-        io.emit('message', setLocation(location))
-        acknowledgeMessage('from server: Location sucessfully shared')
+        const user = getUser(socket.id)
+
+        if (user.error) { return acknowledgeMessage({ error: user.error }) }
+
+        io.to(user.room).emit('message', setLocation(location))
+        acknowledgeMessage({ alert: 'Location sucessfully shared' })
     })
 
     socket.on('disconnect', () => {

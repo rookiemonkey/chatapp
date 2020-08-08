@@ -14,7 +14,10 @@ function locationMessage() {
         const loc = `https://www.google.com/maps?q=${latitude},${longitude}`
         socket.emit('location', loc, ackMessageFromServer => {
             btn_loc.removeAttribute('disabled')
-            console.log(ackMessageFromServer)
+
+            if (ackMessageFromServer.error) { alert(ackMessageFromServer.error) }
+
+            alert(ackMessageFromServer.alert)
         })
     })
 }
