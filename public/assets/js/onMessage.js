@@ -2,6 +2,7 @@
 const messageTemplate = document.querySelector('#message-template').innerHTML
 const usermessageTemplate = document.querySelector('#user-message-template').innerHTML
 const locationTempate = document.querySelector('#location-template').innerHTML
+const userlocationTempate = document.querySelector('#user-location-template').innerHTML
 const alertTemplate = document.querySelector('#alert-template').innerHTML
 
 // on MESSAGE: listener for messages from server
@@ -26,11 +27,20 @@ socket.on('message', eventData => {
             }
             break;
         case 'new_location':
-            html = Mustache.render(locationTempate, {
-                location: eventData.location,
-                username: eventData.sender,
-                timestamp: moment(eventData.timestamp).format('h:mm a')
-            })
+            if (username === eventData.sender) {
+                html = Mustache.render(userlocationTempate, {
+                    location: eventData.location,
+                    username: eventData.sender,
+                    timestamp: moment(eventData.timestamp).format('h:mm a')
+                })
+            }
+            else {
+                html = Mustache.render(locationTempate, {
+                    location: eventData.location,
+                    username: eventData.sender,
+                    timestamp: moment(eventData.timestamp).format('h:mm a')
+                })
+            }
             break;
         case 'new_alert':
             html = Mustache.render(alertTemplate, {

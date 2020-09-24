@@ -136,12 +136,16 @@ button:disabled {
 }
 
 .message__meta {
-    color: #777;
+    color: white;
     font-size: 14px;
 }
 
 .message a {
     color: #0070CC;
+}
+
+#input {
+    border: 1px solid #7C5CBF;
 }
 
 /* Message Composition Styles */
@@ -200,6 +204,15 @@ button:disabled {
     text-align: center;
 }
 
+.message {
+    color: white;
+}
+
+.message_location {
+    color: white !important;
+    text-decoration: underline !important;
+}
+
 .message-meta {
     max-width: 500px;
 }
@@ -213,7 +226,7 @@ button:disabled {
     padding: 10px;
     width: 250px;
 	position: relative;
-	background: #b3babb;
+	background: #7c5cbf94;
 	border-radius: .4em;
 }
 
@@ -221,7 +234,7 @@ button:disabled {
     padding: 10px;
     width: 250px;
 	position: relative;
-	background: #00aabb;
+	background: #7C5CBF;
 	border-radius: .4em;
 }
 
@@ -233,7 +246,7 @@ button:disabled {
 	width: 0;
 	height: 0;
 	border: 0.375em solid transparent;
-	border-right-color: #b3babb;
+	border-right-color: #7c5cbf94;
 	border-left: 0;
 	margin-top: -0.375em;
 	margin-left: -0.375em;
@@ -247,7 +260,7 @@ button:disabled {
 	width: 0;
 	height: 0;
 	border: 0.375em solid transparent;
-	border-left-color: #00aabb;
+	border-left-color: #7C5CBF;
 	border-right: 0;
 	margin-top: -0.375em;
 	margin-right: -0.375em;
