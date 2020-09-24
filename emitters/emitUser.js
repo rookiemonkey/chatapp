@@ -1,4 +1,4 @@
-const setUser = (room, users) => {
+const emitUser = (room, users) => {
     return {
         room,
         users,
@@ -6,4 +6,4 @@ const setUser = (room, users) => {
     }
 }
 
-module.exports = setUser
+module.exports = emitUser

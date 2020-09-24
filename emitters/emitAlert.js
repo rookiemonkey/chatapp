@@ -1,4 +1,4 @@
-const setAlert = message => {
+const emitAlert = message => {
     return {
         type: 'new_alert',
         alert: message,
@@ -6,4 +6,4 @@ const setAlert = message => {
     }
 }
 
-module.exports = setAlert;
+module.exports = emitAlert;

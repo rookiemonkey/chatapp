@@ -1,4 +1,4 @@
-const setLocation = (message, sender) => {
+const emitLocation = (message, sender) => {
     return {
         sender,
         type: 'new_location',
@@ -7,4 +7,4 @@ const setLocation = (message, sender) => {
     }
 }
 
-module.exports = setLocation;
+module.exports = emitLocation;

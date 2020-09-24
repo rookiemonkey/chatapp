@@ -1,4 +1,4 @@
-const setNewMessage = (message, sender) => {
+const emitMessage = (message, sender) => {
     return {
         sender,
         type: 'new_message',
@@ -7,4 +7,4 @@ const setNewMessage = (message, sender) => {
     }
 }
 
-module.exports = setNewMessage;
+module.exports = emitMessage;
