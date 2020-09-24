@@ -4,14 +4,11 @@
 <head>
     <link rel='icon' href='./assets/img/favicon.png' />
     <link rel='stylesheet' href='./assets/css/styles.css' />
+    <script src="./assets/vendor/mustache.min.js"></script>
     <script src="./assets/vendor/particles.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
-
-    <style>
-
-    </style>
 </head>
 
 <body>
@@ -22,6 +19,8 @@
             <form action="./chat.html">
                 <input id='username' type='text' name="username" placeholder="Display Name" required />
                 <input id='room' type='text' name="room" placeholder="Room Name" required />
+                <label>Available Rooms</label>
+                <select id='rooms' name="room_selected"></select>
                 <button>Join</button>
             </form>
         </div>
@@ -29,8 +28,20 @@
     </div>
 </body>
 
+<script id='room-template' type='text/html'>
+    <div class='room'>
+        <option value="{{room}}">{{room}}</option>
+    </div>
+</script>
+
+<script src="./assets/vendor/unpkg.min.js"></script>
+<script src='/socket.io/socket.io.js'></script>
 <script>
     particlesJS.load('particles-js', './assets/js/particles.json');
+
+    const socket = io()
+    socket.emit('index');
+    System.import('./assets/js/getRooms.js');
 </script>
 
 </html>

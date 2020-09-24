@@ -90,7 +90,8 @@
     // isNowConnected should be matched on the socket.emit on the server
     const socket = io()
 
-    const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
+    const queryString = Qs.parse(location.search, { ignoreQueryPrefix: true })
+    const { username, room, room_selected } = queryString;
 
     System.import('./assets/js/toJoin.js');
     System.import('./assets/js/toScroll.js');

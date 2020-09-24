@@ -6,13 +6,14 @@ const express = require('express');
 const app = express();
 
 const http = require('http');
+const { join } = require('path');
 const server = http.createServer(app);
 
 const socketio = require('socket.io');
 const io = socketio(server);
 
 const utilities = require('./utils')
-const { setAlert, setLocation, setNewMessage, setUser, UserUtils } = utilities;
+const { setAlert, setLocation, setNewMessage, setUser, UserUtils, getRooms } = utilities;
 const { addUser, removeUser, getUser, getUsers } = UserUtils;
 
 app.use(express.static("public"));
@@ -26,8 +27,24 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
 
-    socket.on('join', ({ username, room }, acknowledgeMessage) => {
-        const { error, user } = addUser({ id: socket.id, username, room })
+    socket.on('index', () => {
+        const rooms = getRooms();
+        socket.emit('rooms', rooms);
+
+    })
+
+    socket.on('join', ({ username, room, room_selected }, acknowledgeMessage) => {
+        let joinTheUserHere;
+
+        !room_selected && !room
+            ? acknowledgeMessage({ error: 'Please choose a room to join' })
+            : null
+
+        room_selected
+            ? joinTheUserHere = room_selected
+            : joinTheUserHere = room;
+
+        const { error, user } = addUser({ id: socket.id, username, room: joinTheUserHere })
         if (error) { return acknowledgeMessage({ error }) }
 
         socket.join(user.room)
