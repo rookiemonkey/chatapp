@@ -57,12 +57,26 @@
 </script>
 
 <script id='message-template' type='text/html'>
-    <div class='message'>
-        <p>
-            <span class="message__name">@{{username}}</span>
-            <span class="message__meta">{{timestamp}}</span>
-        </p>
-        <p>{{message}}</p>
+    <div class="message-container">
+        <div class='message speech-bubble'>
+            <p class='message-meta'>
+                <span class="message__name">@{{username}}</span>
+                <span class="message__meta">{{timestamp}}</span>
+            </p>
+            <span>{{message}}</span>
+        </div>
+    </div>
+</script>
+
+<script id='user-message-template' type='text/html'>
+    <div class="user-message-container">
+        <div class='message speech-bubble-user'>
+            <p class='message-meta'>
+                <span class="message__name">@{{username}}</span>
+                <span class="message__meta">{{timestamp}}</span>
+            </p>
+            <span>{{message}}</span>
+        </div>
     </div>
 </script>
 
@@ -76,9 +90,11 @@
     </div>
 </script>
 
+
 <script id='alert-template' type='text/html'>
-    <div class='message'>
-        <p><span>{{timestamp}}</span> {{alert}}</p>
+    <div class='alert-message'>
+        <p>{{alert}}</p>
+        <p>{{timestamp}}</p>
     </div>
 </script>
 

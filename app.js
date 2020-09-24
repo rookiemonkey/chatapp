@@ -68,7 +68,7 @@ io.on('connection', socket => {
         socket.join(user.room)
 
         // welcome message to the client upon entering the chat room
-        socket.emit('message', emitAlert('Welcome!'))
+        socket.emit('message', emitAlert('Say Hi! to everybody! 👋'))
 
         // broadcast message to all even the current socket/user for the sidebar online users
         io
