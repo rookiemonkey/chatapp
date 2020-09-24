@@ -58,6 +58,15 @@ button:disabled {
 
 /* Join Page Styles */
 
+#particles-js {
+    z-index: 1000;
+}
+
+.particles-js-canvas-el {
+    position: absolute;
+    z-index: 9999;
+}
+
 .centered-form {
     background: #333744;
     width: 100vw;
@@ -72,6 +81,8 @@ button:disabled {
     background: #F7F7FA;
     padding: 24px;
     width: 250px;
+    z-index: 10000;
+    animation: float 3s ease-out infinite;
 }
 
 .centered-form button {
@@ -180,4 +191,19 @@ button:disabled {
     list-style-type: none;
     font-weight: 300;
     padding: 12px 24px 0 24px;
+}
+
+@keyframes float {
+	0% {
+		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(0px);
+	}
+	50% {
+		box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+		transform: translatey(-20px);
+	}
+	100% {
+		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(0px);
+	}
 }
