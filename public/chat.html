@@ -163,7 +163,8 @@
     const socket = io()
 
     const queryString = Qs.parse(location.search, { ignoreQueryPrefix: true })
-    const { username, room, room_selected } = queryString;
+    let { username, room, room_selected } = queryString;
+    username = username.toLowerCase();
 
     System.import('./assets/js/toJoin.js');
     System.import('./assets/js/toScroll.js');

@@ -26,7 +26,6 @@ socket.on('message', eventData => {
 
             // current user message
             else if (username === eventData.sender) {
-                console.log('user sending a good message')
                 html = Mustache.render(usermessageTemplate, {
                     message: eventData.message,
                     username: eventData.sender,
@@ -36,7 +35,6 @@ socket.on('message', eventData => {
 
             // other users message
             else {
-                console.log('other users message')
                 html = Mustache.render(messageTemplate, {
                     message: eventData.message,
                     username: eventData.sender,
