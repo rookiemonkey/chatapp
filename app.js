@@ -53,10 +53,10 @@ io.on('connection', socket => {
             return acknowledgeMessage({ error: 'Please choose a room to join' })
         }
 
-        if (room_selected) {
-            joinTheUserHere = room_selected
+        if (room_selected === 'create' && room) {
+            joinTheUserHere = room
         } else {
-            joinTheUserHere = room;
+            joinTheUserHere = room_selected
         }
 
         const { error, user } = addUser({ id: socket.id, username, room: joinTheUserHere })

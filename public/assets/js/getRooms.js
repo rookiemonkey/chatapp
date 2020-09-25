@@ -3,9 +3,7 @@ socket.on('rooms', (rooms) => {
     const roomOptions = document.querySelector('#rooms');
 
     if (rooms.length === 0) {
-        roomOptions.setAttribute('disabled', 'disabled')
-        const html = Mustache.render(roomTemplate, { room: 'No avaiable rooms' })
-        roomOptions.insertAdjacentHTML('beforeend', html)
+        roomOptions.insertAdjacentHTML('afterend', '<small>No Available Chat Rooms</small>')
     }
 
     rooms.forEach(room => {

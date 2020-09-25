@@ -20,10 +20,12 @@
                 <input id='username' type='text' name="username" placeholder="Display Name" required />
                 <input id='room' type='text' name="room" placeholder="New Room" required />
                 <small id='room_help'>Note: Please fill out the 'New Room' with anything upon choosing from the
-                    available rooms
+                    available rooms. Choose 'Create Room' and enter the name above if want a new room.
                     below</small>
                 <label style="margin-top: 16px;">Available Rooms</label>
-                <select id='rooms' name="room_selected"></select>
+                <select id='rooms' name="room_selected">
+                    <option value="create" selected>Create Room</option>
+                </select>
                 <button>Join</button>
             </form>
         </div>
