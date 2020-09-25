@@ -96,11 +96,9 @@ io.on('connection', socket => {
         }
 
         if (filter.isProfane(newMessage)) {
-            return acknowledgeMessage({ error: 'Profanity not allowed' })
-        }
-
-        if (!newMessage) {
-            return acknowledgeMessage({ error: 'It would be best if we can say something' })
+            // send the message back to the user only
+            socket.emit('message', emitMessage('Profanity is not allowed', user.username));
+            return acknowledgeMessage(false)
         }
 
         acknowledgeMessage(false)

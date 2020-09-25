@@ -266,6 +266,14 @@ select#rooms {
 	border-radius: .4em;
 }
 
+.speech-bubble-user-alert {
+    padding: 10px;
+    width: 250px;
+	position: relative;
+	background: #bd2130;
+	border-radius: .4em;
+}
+
 .speech-bubble:after {
 	content: '';
 	position: absolute;
@@ -289,6 +297,21 @@ select#rooms {
 	height: 0;
 	border: 0.375em solid transparent;
 	border-left-color: #7C5CBF;
+	border-right: 0;
+	margin-top: -0.375em;
+	margin-right: -0.375em;
+}
+
+
+.speech-bubble-user-alert:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 0.375em solid transparent;
+	border-left-color: #bd2130;
 	border-right: 0;
 	margin-top: -0.375em;
 	margin-right: -0.375em;
