@@ -3,7 +3,7 @@ socket.on('rooms', (rooms) => {
     const roomOptions = document.querySelector('#rooms');
 
     if (rooms.length === 0) {
-        roomOptions.insertAdjacentHTML('afterend', '<small>No Available Chat Rooms</small>')
+        roomOptions.insertAdjacentHTML('afterend', '<small class="room_noavilable">No Available Chat Rooms</small>')
     }
 
     rooms.forEach(room => {

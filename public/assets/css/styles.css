@@ -109,6 +109,13 @@ select#rooms {
     margin-bottom: 16px;
 }
 
+.room_noavilable {
+    font-size: x-small;
+    color: gray;
+    text-align: center;
+    display: block;
+}
+
 /* Chat Page Layout */
 
 .chat {
