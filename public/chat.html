@@ -16,10 +16,16 @@
     <div class="chat">
 
         <aside id='sidebar' class="chat__sidebar">
-
+            <a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="closeNav()">&times;</a>
         </aside>
 
-        <div class="chat__main">
+        <div id="main" class="chat__main">
+            <button class="openbtn" onclick="openNav()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="12" height="12" viewBox="0 0 24 24">
+                    <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
+                </svg>
+            </button>
+
             <div id='messages' class="chat__messages"></div>
 
             <div class="compose">
@@ -146,6 +152,39 @@
     System.import('./assets/js/sendDisconnect.js');
     System.import('./assets/js/onMessage.js');
     System.import('./assets/js/onRoom.js');
+
+    const sidebar = document.getElementById('sidebar');
+    const main = document.getElementById('main');
+    const closebtn = document.getElementById('closebtn');
+
+
+    /* Check width every 500ms since scree.width will only check upon a reload*/
+    checkWidth();
+    setInterval(checkWidth, 500);
+
+    function checkWidth() {
+        if (window.screen.width < 650) {
+            sidebar.classList.add("sidebar");
+            closebtn.classList.remove("hide");
+        }
+        else {
+            sidebar.classList.remove("sidebar");
+            closebtn.classList.add("hide");
+        }
+    }
+
+    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+    function openNav() {
+        sidebar.style.width = "250px";
+        main.style.marginLeft = "250px";
+    }
+
+    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+        sidebar.style.width = "0";
+        main.style.marginLeft = "0";
+    }
+
 </script>
 
 </html>

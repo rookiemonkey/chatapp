@@ -110,7 +110,8 @@ select#rooms {
     color: white;
     background: #333744;
     width: 225px;
-    overflow-y: scroll
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /* Chat styles */
@@ -197,6 +198,7 @@ select#rooms {
 }
 
 .users {
+    width: 250px;
     list-style-type: none;
     font-weight: 300;
     padding: 12px 24px 0 24px;
@@ -269,6 +271,98 @@ select#rooms {
 	border-right: 0;
 	margin-top: -0.375em;
 	margin-right: -0.375em;
+}
+
+ /* The sidebar menu */
+.sidebar {
+  height: 100%; 
+  width: 0; 
+  position: fixed; 
+  z-index: 1; 
+  top: 0;
+  left: 0;
+  background-color: #333744; 
+  overflow-x: hidden; 
+  padding-top: 60px; 
+  transition: 0.5s;
+}
+
+/* The sidebar links */
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+    margin-left: 24px;
+    width: 25px;
+    height: 25px;
+    display: none;
+    cursor: pointer;
+    background-color: #7C5CBF;
+    color: white;
+    padding: 2.5px;
+    border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s; /* If you want a transition effect */
+  padding: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+
+    .sidebar a {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    #user-template-container {
+        position: absolute;
+    }
+
+    .openbtn {
+        display: inline;
+    }
+
+    .chat__messages {
+        height: 100vh;
+        padding: 24px 24px 0 24px;
+        overflow-y: scroll;
+    }   
 }
 
 @keyframes float {
