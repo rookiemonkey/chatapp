@@ -94,6 +94,16 @@ button:disabled {
     width: 100%;
 }
 
+input#room {
+    margin-bottom: 0px;
+}
+
+#room_help {
+    font-size: x-small;
+    line-height: 0.8;
+    margin-bottom: 16px;
+}
+
 select#rooms {
     width: 100%;
     margin-bottom: 16px;
