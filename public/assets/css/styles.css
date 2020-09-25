@@ -201,12 +201,14 @@ select#rooms {
 }
 
 .room-subtitle {
+    font-size: 10px;
     padding-bottom: 12px;
     padding-left: 24px;
     background: #2c2f3a;
 }
 
-.room-subtitle-text {
+#room-subtitle-text, .room-subtitle {
+    font-size: 10px;
     color: white;
     text-decoration: none;
 }
