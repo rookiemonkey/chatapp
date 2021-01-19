@@ -10,7 +10,14 @@ const alertTemplate = document.querySelector('#alert-template').innerHTML
 socket.on('message', eventData => {
     let html;
 
+    console.log({
+        username,
+        eventData
+    })
+
     switch (eventData.type) {
+
+
 
 
         case 'new_message':
